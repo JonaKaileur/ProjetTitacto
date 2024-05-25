@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 
 import com.example.projettitacto.R;
 
+import java.security.PrivateKey;
+
 public class TicTacToeCarte extends View {
     private final int CouleurCarte;
     private final int CouleurX;
@@ -50,6 +52,7 @@ public class TicTacToeCarte extends View {
         paint.setAntiAlias(true);
 
         drawGameboard(canvas);
+        drawX(canvas,1,1);
 
     }
 
@@ -64,6 +67,19 @@ public class TicTacToeCarte extends View {
         for (int r=1; r<3;r++){
             canvas.drawLine(0,cellSize*r,canvas.getWidth(),cellSize*r,paint);
         }
+    }
+
+
+
+
+    private void drawX(Canvas canvas,int row,int col){
+        paint.setColor(CouleurX);
+
+        canvas.drawLine((col+1)*cellSize,row*cellSize,col*cellSize,(row+1)*cellSize,paint);
+        canvas.drawLine(col*cellSize,row*cellSize,(row+1)*cellSize,(row+1)*cellSize,paint);
+    }
+    private void drawO(Canvas canvas,int row,int col){
+        paint.setColor(CouleurO);
     }
 
 }
