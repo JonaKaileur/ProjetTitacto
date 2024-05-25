@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Projet Titacto</string>
+    <string name="Titre"> Tic Tac Toe </string>
+    <string name="playButton">Jouer</string>
+
+    <string name="TitrePlayerSetup">ENTRER VOTRE NOM</string>
+    <string name="Label11">Player1</string>
+    <string name="Label12">Player2</string>
+    <string name="NameHint">ENTRER VOTRE NOM</string>s
+    <string name="BoutonEnvoi">Lancer</string>s
+
+    <string name="BoutonRejouer">Rejouer</string>
+    <string name="BoutonAccueil">Accueil</string>
+
+
+</resources>

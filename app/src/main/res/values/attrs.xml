@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TicTacToeCarte">
+        <attr name="CouleurCarte" format="color"/>
+        <attr name="CouleurX" format="color"/>
+        <attr name="CouleurO" format="color"/>
+        <attr name="WinningLineColor" format="color"/>
+    </declare-styleable>
+</resources>
