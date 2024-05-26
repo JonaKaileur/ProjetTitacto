@@ -62,7 +62,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            custom:CouleurCarte="#000000"/>
+            custom:CouleurCarte="#000000"
+            custom:CouleurX="#FF0000"
+            custom:CouleurO="#0000FF"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
