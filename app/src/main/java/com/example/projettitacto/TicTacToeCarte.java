@@ -5,11 +5,14 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.example.projettitacto.R;
+
+import java.security.PrivateKey;
 
 public class TicTacToeCarte extends View {
     private final int CouleurCarte;
@@ -22,8 +25,11 @@ public class TicTacToeCarte extends View {
 
     private int cellSize = getWidth()/3;
 
+    private final GameLogic game;
+
     public TicTacToeCarte(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        game = new GameLogic();
         TypedArray a =context.getTheme().obtainStyledAttributes(attrs, R.styleable.TicTacToeCarte,0,0);
 
         try {
@@ -50,8 +56,51 @@ public class TicTacToeCarte extends View {
         paint.setAntiAlias(true);
 
         drawGameboard(canvas);
+        drawX(canvas,2,2);
+        drawO(canvas,1,1);
+        drawMarkers(canvas);
 
     }
+
+    private void drawMarkers (Canvas canvas){
+        for(int r=0;r<3;r++){
+            for(int c=0;c<3;c++){
+                if(game.getGameBoard()[r][c] != 0){
+                    drawX(canvas,r,c);
+                }else {
+                    drawO(canvas,r,c);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        float x = event.getX();
+        float y = event.getX();
+
+        int action = event.getAction();
+
+        if(action == MotionEvent.ACTION_DOWN){
+            int row = (int)Math.ceil(y/cellSize);
+            int col = (int)Math.ceil(x/cellSize);
+
+            if (game.updateGameBoard(row,col)){
+                invalidate();
+
+                if (game.getPlayer() % 2 == 0){
+                    game.setPlayer(game.getPlayer()-1);
+                }else {
+                    game.setPlayer(game.getPlayer()+1);
+                }
+            }
+
+            invalidate();
+            return true;
+        }
+        return false;
+    }
+
 
     public void drawGameboard(Canvas canvas){
         paint.setColor(CouleurCarte);
@@ -64,6 +113,27 @@ public class TicTacToeCarte extends View {
         for (int r=1; r<3;r++){
             canvas.drawLine(0,cellSize*r,canvas.getWidth(),cellSize*r,paint);
         }
+    }
+
+
+
+
+    private void drawX(Canvas canvas,int row,int col){
+        paint.setColor(CouleurX);
+        //X se trace de la deuxieme colone a la première et y de la preemière à la deuxième
+        //Pour améliore le design de la video aller sur la partie 4 a la minute 6.00
+        canvas.drawLine((col+1)*cellSize,
+                        row*cellSize,
+                        col*cellSize,
+                        (row+1)*cellSize,
+                               paint);
+
+        canvas.drawLine(col*cellSize,row*cellSize,(col+1)*cellSize,(row+1)*cellSize,paint);
+    }
+    private void drawO(Canvas canvas,int row,int col){
+        paint.setColor(CouleurO);
+
+        canvas.drawOval(col*cellSize,row*cellSize,(col*cellSize+cellSize),(row*cellSize+cellSize),paint);
     }
 
 }
