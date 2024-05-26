@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ProjetTitacto"
         tools:targetApi="31">
         <activity
+            android:name=".JoueurActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameDisplay"
             android:exported="false" />
         <activity
