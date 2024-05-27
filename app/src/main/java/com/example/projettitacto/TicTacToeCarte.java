@@ -1,5 +1,6 @@
 package com.example.projettitacto;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -55,29 +56,19 @@ public class TicTacToeCarte extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
 
+        // drawX(canvas,2,2);
+        //drawO(canvas,1,1);
+
         drawGameboard(canvas);
-        drawX(canvas,2,2);
-        drawO(canvas,1,1);
         drawMarkers(canvas);
 
     }
 
-    private void drawMarkers (Canvas canvas){
-        for(int r=0;r<3;r++){
-            for(int c=0;c<3;c++){
-                if(game.getGameBoard()[r][c] != 0){
-                    drawX(canvas,r,c);
-                }else {
-                    drawO(canvas,r,c);
-                }
-            }
-        }
-    }
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event){
         float x = event.getX();
-        float y = event.getX();
+        float y = event.getY();
 
         int action = event.getAction();
 
@@ -88,6 +79,7 @@ public class TicTacToeCarte extends View {
             if (game.updateGameBoard(row,col)){
                 invalidate();
 
+                // sa met a jour les joueur pour dire quelle joueur joue
                 if (game.getPlayer() % 2 == 0){
                     game.setPlayer(game.getPlayer()-1);
                 }else {
@@ -98,6 +90,7 @@ public class TicTacToeCarte extends View {
             invalidate();
             return true;
         }
+
         return false;
     }
 
@@ -105,7 +98,7 @@ public class TicTacToeCarte extends View {
     public void drawGameboard(Canvas canvas){
         paint.setColor(CouleurCarte);
         paint.setStrokeWidth(16);
-        
+
         for (int c=1; c<3;c++){
             canvas.drawLine(cellSize*c,0,cellSize*c,canvas.getWidth(),paint);
         }
@@ -118,22 +111,49 @@ public class TicTacToeCarte extends View {
 
 
 
+    private void drawMarkers (Canvas canvas){
+        for(int r=0;r<3;r++){
+            for(int c=0;c<3;c++){
+                if(game.getGameBoard()[r][c] != 0){
+                    if(game.getGameBoard() [r][c] == 1){
+                        drawX(canvas,r,c);
+                    }
+                    else {
+                        drawO(canvas,r,c);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
     private void drawX(Canvas canvas,int row,int col){
         paint.setColor(CouleurX);
         //X se trace de la deuxieme colone a la première et y de la preemière à la deuxième
         //Pour améliore le design de la video aller sur la partie 4 a la minute 6.00
-        canvas.drawLine((col+1)*cellSize,
-                        row*cellSize,
-                        col*cellSize,
-                        (row+1)*cellSize,
+        canvas.drawLine((float) ((col+1)*cellSize - cellSize*0.2),
+                    (float) (row*cellSize + cellSize*0.2),
+                    (float) (col*cellSize + cellSize*0.2),
+                    (float) ((row+1)*cellSize - cellSize*0.2),
                                paint);
 
-        canvas.drawLine(col*cellSize,row*cellSize,(col+1)*cellSize,(row+1)*cellSize,paint);
+        canvas.drawLine((float) (col*cellSize + cellSize*0.2),
+                (float) (row*cellSize + cellSize*0.2),
+                (float) ((col+1)*cellSize - cellSize*0.2),
+                (float) ((row+1)*cellSize - cellSize*0.2),
+                paint);
     }
     private void drawO(Canvas canvas,int row,int col){
         paint.setColor(CouleurO);
 
-        canvas.drawOval(col*cellSize,row*cellSize,(col*cellSize+cellSize),(row*cellSize+cellSize),paint);
+        canvas.drawOval((float) (col*cellSize + cellSize*0.2),
+                (float) (row*cellSize + cellSize*0.2),
+                (float) ((col*cellSize+cellSize) - cellSize*0.2),
+                (float) ((row*cellSize+cellSize) - cellSize*0.2),
+                paint);
     }
 
 }
