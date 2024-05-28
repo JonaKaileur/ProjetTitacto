@@ -19,19 +19,22 @@ public class GameDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.game_display);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
         Button playAgainBTN=findViewById(R.id.play_again);
         Button homeBTN=findViewById(R.id.home_button);
         TextView playerturn =findViewById(R.id.player_display);
 
-        String[] playerNames = getIntent().getStringArrayExtra("");
+        String[] playerNames = getIntent().getStringArrayExtra("PLAYER_NAMES");
 
+        playAgainBTN.setVisibility(View.GONE);
+        homeBTN.setVisibility(View.GONE);
+
+        if (playerNames != null){
+            playerturn.setText("au tour de "+playerNames[0]);
+        }
 
         ticTacToeCarte =findViewById(R.id.ticTacToeCarte);
+        ticTacToeCarte.setUpGame(playAgainBTN,homeBTN,playerturn,playerNames);
     }
     public void ButtonPlayAgainClik(View view){
         ticTacToeCarte.reinitJeux();

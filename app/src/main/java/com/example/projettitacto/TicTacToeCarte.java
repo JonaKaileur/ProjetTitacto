@@ -22,6 +22,8 @@ public class TicTacToeCarte extends View {
     private final int CouleurX;
     private final int CouleurO;
 
+    private boolean winningLine = false;
+
     private final int WinnigLineColor;
 
     private final Paint paint = new Paint();
@@ -74,19 +76,27 @@ public class TicTacToeCarte extends View {
 
         int action = event.getAction();
 
+
+
         if(action == MotionEvent.ACTION_DOWN){
             int row = (int)Math.ceil(y/cellSize);
             int col = (int)Math.ceil(x/cellSize);
+            if (!winningLine){
+                if (game.updateGameBoard(row,col)){
+                    invalidate();
+                    if(game.winnerCheck()){
+                        winningLine = true;
+                        invalidate();
+                    }
 
-            if (game.updateGameBoard(row,col)){
-                invalidate();
-
-                // sa met a jour les joueur pour dire quelle joueur joue
-                if (game.getPlayer() % 2 == 0){
-                    game.setPlayer(game.getPlayer()-1);
-                }else {
-                    game.setPlayer(game.getPlayer()+1);
+                    // sa met a jour les joueur pour dire quelle joueur joue
+                    if (game.getPlayer() % 2 == 0){
+                        game.setPlayer(game.getPlayer()-1);
+                    }else {
+                        game.setPlayer(game.getPlayer()+1);
+                    }
                 }
+
             }
 
             invalidate();
@@ -157,7 +167,7 @@ public class TicTacToeCarte extends View {
                 (float) ((row*cellSize+cellSize) - cellSize*0.2),
                 paint);
     }
-    public void SetUpGame(Button playAgain, Button home, TextView playerDisplay,String[] names){
+    public void setUpGame(Button playAgain, Button home, TextView playerDisplay,String[] names){
         game.setPlayAgainBTN(playAgain);
         game.setHomeBTN(home);
         game.setPlayerTurn(playerDisplay);
@@ -166,6 +176,7 @@ public class TicTacToeCarte extends View {
 
     public  void  reinitJeux() {
         game.reinitJeux();
+        winningLine = false;
     }
 
 }
