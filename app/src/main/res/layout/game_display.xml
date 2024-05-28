@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#D7CCC8"
-        tools:layout_editor_absoluteX="-112dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             tools:ignore="MissingConstraints">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/play_again"
                 android:layout_width="104dp"
                 android:layout_height="53dp"
                 android:layout_marginStart="64dp"
@@ -42,7 +42,7 @@
 
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/home_button"
                 android:layout_width="114dp"
                 android:layout_height="51dp"
                 android:background="@drawable/boutton_accueil"
@@ -64,8 +64,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             custom:CouleurCarte="#000000"
-            custom:CouleurX="#FF0000"
-            custom:CouleurO="#0000FF"/>
+            custom:CouleurO="#0000FF"
+            custom:CouleurX="#FF0000" />
+
+        <TextView
+            android:id="@+id/player_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="70dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
