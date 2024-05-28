@@ -160,7 +160,7 @@ public class TicTacToeCarte extends View {
     public void SetUpGame(Button playAgain, Button home, TextView playerDisplay,String[] names){
         game.setPlayAgainBTN(playAgain);
         game.setHomeBTN(home);
-        game.setPlayer(playerDisplay);
+        game.setPlayerTurn(playerDisplay);
         game.setPlayerNames(names);
     }
 

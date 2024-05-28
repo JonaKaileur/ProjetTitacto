@@ -24,9 +24,9 @@ public class GameLogic {
         if (gameBoard[row-1][col-1]==0){
             gameBoard[row - 1][col - 1] = player;
             if (player ==1){
-                playerTurn.setText(("au tour du :"playerNames[1]));
+                playerTurn.setText(("au tour du :"+playerNames[1]));
             }else {
-                playerTurn.setText(("au tour du :"playerNames[0]));
+                playerTurn.setText(("au tour du :"+playerNames[0]));
             }
 
             return true;
