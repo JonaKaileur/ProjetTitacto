@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -154,6 +156,16 @@ public class TicTacToeCarte extends View {
                 (float) ((col*cellSize+cellSize) - cellSize*0.2),
                 (float) ((row*cellSize+cellSize) - cellSize*0.2),
                 paint);
+    }
+    public void SetUpGame(Button playAgain, Button home, TextView playerDisplay,String[] names){
+        game.setPlayAgainBTN(playAgain);
+        game.setHomeBTN(home);
+        game.setPlayer(playerDisplay);
+        game.setPlayerNames(names);
+    }
+
+    public  void  reinitJeux() {
+        game.reinitJeux();
     }
 
 }

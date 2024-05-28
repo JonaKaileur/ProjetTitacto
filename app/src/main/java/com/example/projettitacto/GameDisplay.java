@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class GameDisplay extends AppCompatActivity {
-
+    private TicTacToeCarte ticTacToeCarte;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +22,11 @@ public class GameDisplay extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ticTacToeCarte =findViewById(R.id.ticTacToeCarte);
     }
     public void ButtonPlayAgainClik(View view){
-        //pas encore
+        ticTacToeCarte.reinitJeux();
+        ticTacToeCarte.invalidate();
     }
 
     public void ButtonGoHome(View view){
