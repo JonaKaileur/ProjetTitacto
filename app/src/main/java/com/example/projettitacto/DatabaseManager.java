@@ -50,4 +50,12 @@ public class DatabaseManager extends SQLiteOpenHelper{
         }
         return listJoueur;
     }
+
+    public void insertJoueurList(String listJoueur){
+        String name = listJoueur.replace("'","((%))");
+        String strSql = "INSERT INTO ListJoueur"
+                +"(name) VALUE(' "
+                + name + "')";
+        this.getWritableDatabase().execSQL(strSql);
+    }
 }
