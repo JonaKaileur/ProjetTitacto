@@ -65,7 +65,9 @@
             app:layout_constraintTop_toTopOf="parent"
             custom:CouleurCarte="#000000"
             custom:CouleurO="#0000FF"
-            custom:CouleurX="#FF0000" />
+            custom:CouleurX="#FF0000"
+            custom:WinningLineColor="#00FF00"
+            />
 
         <TextView
             android:id="@+id/player_display"
