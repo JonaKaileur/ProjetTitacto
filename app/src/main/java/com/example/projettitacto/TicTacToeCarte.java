@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 
 import com.example.projettitacto.R;
 
-import java.security.PrivateKey;
-
 public class TicTacToeCarte extends View {
     private final int CouleurCarte;
     private final int CouleurX;
@@ -24,86 +22,86 @@ public class TicTacToeCarte extends View {
 
     private boolean winningLine = false;
 
-    private final int WinnigLineColor;
+    private final int WinningLineColor;
 
     private final Paint paint = new Paint();
 
-    private int cellSize = getWidth()/3;
+    private int cellSize = getWidth() / 3;
 
     private final GameLogic game;
 
+    // Constructeur de la vue TicTacToeCarte
     public TicTacToeCarte(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         game = new GameLogic();
-        TypedArray a =context.getTheme().obtainStyledAttributes(attrs, R.styleable.TicTacToeCarte,0,0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TicTacToeCarte, 0, 0);
 
         try {
-            CouleurCarte=a.getInteger(R.styleable.TicTacToeCarte_CouleurCarte,0);
-            CouleurX=a.getInteger(R.styleable.TicTacToeCarte_CouleurX,0);
-            CouleurO=a.getInteger(R.styleable.TicTacToeCarte_CouleurO,0);
-            WinnigLineColor=a.getInteger(R.styleable.TicTacToeCarte_WinningLineColor,0);
-        }finally {
+            CouleurCarte = a.getInteger(R.styleable.TicTacToeCarte_CouleurCarte, 0);
+            CouleurX = a.getInteger(R.styleable.TicTacToeCarte_CouleurX, 0);
+            CouleurO = a.getInteger(R.styleable.TicTacToeCarte_CouleurO, 0);
+            WinningLineColor = a.getInteger(R.styleable.TicTacToeCarte_WinningLineColor, 0);
+        } finally {
+            //Libère les ressources de TypedArray après utilisation
             a.recycle();
         }
     }
-    @Override
-    protected void onMeasure(int width,int height){
-        super.onMeasure(width,height);
-        int dimensions = Math.min(getMeasuredWidth(),getMeasuredHeight());
-        cellSize = dimensions/3;
 
-        setMeasuredDimension(dimensions,dimensions);
+    // Mesure les dimensions de la vue et définit la taille de chaque cellule
+    @Override
+    protected void onMeasure(int width, int height) {
+        super.onMeasure(width, height);
+        int dimensions = Math.min(getMeasuredWidth(), getMeasuredHeight());
+        cellSize = dimensions / 3;
+
+        setMeasuredDimension(dimensions, dimensions);
     }
 
+    // Dessine le plateau de jeu et les marqueurs
     @Override
-    protected void onDraw(Canvas canvas){
+    protected void onDraw(Canvas canvas) {
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
 
-        // drawX(canvas,2,2);
-        //drawO(canvas,1,1);
-
+        // Dessiner le plateau de jeu
         drawGameboard(canvas);
+        // Dessiner les marqueurs (X et O)
         drawMarkers(canvas);
 
-        if (winningLine){
-            paint.setColor(WinnigLineColor);
+        // Si une ligne gagnante est détectée, la dessiner
+        if (winningLine) {
+            paint.setColor(WinningLineColor);
             drawWinningLine(canvas);
         }
-
     }
 
-
-
+    // Gère les événements tactiles pour mettre à jour le plateau de jeu
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
 
         int action = event.getAction();
 
-
-
-        if(action == MotionEvent.ACTION_DOWN){
-            int row = (int)Math.ceil(y/cellSize);
-            int col = (int)Math.ceil(x/cellSize);
-            if (!winningLine){
-                if (game.updateGameBoard(row,col)){
+        if (action == MotionEvent.ACTION_DOWN) {
+            int row = (int) Math.ceil(y / cellSize);
+            int col = (int) Math.ceil(x / cellSize);
+            if (!winningLine) {
+                if (game.updateGameBoard(row, col)) {
                     invalidate();
-                    if(game.winnerCheck()){
+                    if (game.winnerCheck()) {
                         winningLine = true;
                         invalidate();
                     }
 
-                    // sa met a jour les joueur pour dire quelle joueur joue
-                    if (game.getPlayer() % 2 == 0){
-                        game.setPlayer(game.getPlayer()-1);
-                    }else {
-                        game.setPlayer(game.getPlayer()+1);
+                    // Met à jour le joueur qui joue
+                    if (game.getPlayer() % 2 == 0) {
+                        game.setPlayer(game.getPlayer() - 1);
+                    } else {
+                        game.setPlayer(game.getPlayer() + 1);
                     }
                 }
-
             }
 
             invalidate();
@@ -113,120 +111,121 @@ public class TicTacToeCarte extends View {
         return false;
     }
 
-
-    public void drawGameboard(Canvas canvas){
+    // Dessine le plateau de jeu
+    public void drawGameboard(Canvas canvas) {
         paint.setColor(CouleurCarte);
         paint.setStrokeWidth(16);
-
-        for (int c=1; c<3;c++){
-            canvas.drawLine(cellSize*c,0,cellSize*c,canvas.getWidth(),paint);
+        //Dessin des lignes horizontales
+        for (int c = 1; c < 3; c++) {
+            canvas.drawLine(cellSize * c, 0, cellSize * c, canvas.getWidth(), paint);
         }
-
-        for (int r=1; r<3;r++){
-            canvas.drawLine(0,cellSize*r,canvas.getWidth(),cellSize*r,paint);
+        //Dessin des lignes horizontales
+        for (int r = 1; r < 3; r++) {
+            canvas.drawLine(0, cellSize * r, canvas.getWidth(), cellSize * r, paint);
         }
     }
 
-
-
-
-    private void drawMarkers (Canvas canvas){
-        for(int r=0;r<3;r++){
-            for(int c=0;c<3;c++){
-                if(game.getGameBoard()[r][c] != 0){
-                    if(game.getGameBoard() [r][c] == 1){
-                        drawX(canvas,r,c);
-                    }
-                    else {
-                        drawO(canvas,r,c);
+    // Dessine les marqueurs (X et O) sur le plateau
+    private void drawMarkers(Canvas canvas) {
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                if (game.getGameBoard()[r][c] != 0) {
+                    if (game.getGameBoard()[r][c] == 1) {
+                        drawX(canvas, r, c);
+                    } else {
+                        drawO(canvas, r, c);
                     }
                 }
             }
         }
     }
 
-
-
-
-
-    private void drawX(Canvas canvas,int row,int col){
+    // Dessine un X dans la cellule spécifiée
+    private void drawX(Canvas canvas, int row, int col) {
         paint.setColor(CouleurX);
-        //X se trace de la deuxieme colone a la première et y de la preemière à la deuxième
-        //Pour améliore le design de la video aller sur la partie 4 a la minute 6.00
-        canvas.drawLine((float) ((col+1)*cellSize - cellSize*0.2),
-                    (float) (row*cellSize + cellSize*0.2),
-                    (float) (col*cellSize + cellSize*0.2),
-                    (float) ((row+1)*cellSize - cellSize*0.2),
-                               paint);
+        canvas.drawLine((float) ((col + 1) * cellSize - cellSize * 0.2),
+                (float) (row * cellSize + cellSize * 0.2),
+                (float) (col * cellSize + cellSize * 0.2),
+                (float) ((row + 1) * cellSize - cellSize * 0.2),
+                paint);
 
-        canvas.drawLine((float) (col*cellSize + cellSize*0.2),
-                (float) (row*cellSize + cellSize*0.2),
-                (float) ((col+1)*cellSize - cellSize*0.2),
-                (float) ((row+1)*cellSize - cellSize*0.2),
+        canvas.drawLine((float) (col * cellSize + cellSize * 0.2),
+                (float) (row * cellSize + cellSize * 0.2),
+                (float) ((col + 1) * cellSize - cellSize * 0.2),
+                (float) ((row + 1) * cellSize - cellSize * 0.2),
                 paint);
     }
-    private void drawO(Canvas canvas,int row,int col){
+
+    // Dessine un O dans la cellule spécifiée
+    private void drawO(Canvas canvas, int row, int col) {
         paint.setColor(CouleurO);
 
-        canvas.drawOval((float) (col*cellSize + cellSize*0.2),
-                (float) (row*cellSize + cellSize*0.2),
-                (float) ((col*cellSize+cellSize) - cellSize*0.2),
-                (float) ((row*cellSize+cellSize) - cellSize*0.2),
+        canvas.drawOval((float) (col * cellSize + cellSize * 0.2),
+                (float) (row * cellSize + cellSize * 0.2),
+                (float) ((col * cellSize + cellSize) - cellSize * 0.2),
+                (float) ((row * cellSize + cellSize) - cellSize * 0.2),
                 paint);
     }
 
-    private void drawHorizontalLine(Canvas canvas,int row,int col){
-        canvas.drawLine(col,row *cellSize+cellSize/2,
-                cellSize*3,row*cellSize+cellSize/2,
+    // Dessine une ligne horizontale pour une ligne gagnante
+    private void dessineLigneHorizontal(Canvas canvas, int row, int col) {
+        canvas.drawLine(col, row * cellSize + cellSize / 2,
+                cellSize * 3, row * cellSize + cellSize / 2,
                 paint);
     }
 
-    private  void drawVerticalLine(Canvas canvas,int row,int col){
-        canvas.drawLine(col*cellSize+cellSize/2,row,
-                col*cellSize+cellSize/2,cellSize*3,
+    // Dessine une ligne verticale pour une ligne gagnante
+    private void dessineLigneVertical(Canvas canvas, int row, int col) {
+        canvas.drawLine(col * cellSize + cellSize / 2, row,
+                col * cellSize + cellSize / 2, cellSize * 3,
                 paint);
     }
 
-    private void drawDiagonalLineNeg(Canvas canvas){
-        canvas.drawLine(0,0,
-                cellSize*3,cellSize*3,
-                paint);
-    }
-    private void drawDiagonalLinePos(Canvas canvas){
-        canvas.drawLine(0,cellSize*3 ,
-                cellSize*3,0,
+    // Dessine une ligne diagonale de haut en bas à droite pour une ligne gagnante
+    private void dessineLigneDiagonalNeg(Canvas canvas) {
+        canvas.drawLine(0, 0,
+                cellSize * 3, cellSize * 3,
                 paint);
     }
 
-    private void drawWinningLine(Canvas canvas){
-        int row =game.getWinType()[0];
-        int col =game.getWinType()[1];
-        switch (game.getWinType()[2]){
+    // Dessine une ligne diagonale de bas en haut à droite pour une ligne gagnante
+    private void dessineLigneDiagonalPos(Canvas canvas) {
+        canvas.drawLine(0, cellSize * 3,
+                cellSize * 3, 0,
+                paint);
+    }
+
+    // Dessine la ligne gagnante
+    private void drawWinningLine(Canvas canvas) {
+        int row = game.getWinType()[0];
+        int col = game.getWinType()[1];
+        switch (game.getWinType()[2]) {
             case 1:
-                drawHorizontalLine(canvas,row,col);
+                dessineLigneHorizontal(canvas, row, col);
                 break;
             case 2:
-                drawVerticalLine(canvas,row,col);
+                dessineLigneVertical(canvas, row, col);
                 break;
             case 3:
-                drawDiagonalLineNeg(canvas);
+                dessineLigneDiagonalNeg(canvas);
                 break;
             case 4:
-                drawDiagonalLinePos(canvas);
+                dessineLigneDiagonalPos(canvas);
                 break;
         }
     }
 
-    public void setUpGame(Button playAgain, Button home, TextView playerDisplay,String[] names){
+    // Configure le jeu avec les boutons et les noms des joueurs
+    public void setUpGame(Button playAgain, Button home, TextView playerDisplay, String[] names) {
         game.setPlayAgainBTN(playAgain);
         game.setHomeBTN(home);
         game.setPlayerTurn(playerDisplay);
         game.setPlayerNames(names);
     }
 
-    public  void  reinitJeux() {
+    // Réinitialise le jeu
+    public void reinitJeux() {
         game.reinitJeux();
         winningLine = false;
     }
-
 }

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#42A5F3"/> <!-- Couleur de fond lorsqu'il est appuyer -->
+            <corners android:radius="20dp"/> <!-- Coins arrondis -->
+            <stroke android:color="#2962FF" android:width="2dp"/> <!-- Contour lorsqu'il est appuyer -->
+        </shape>
+    </item>
     <item>
         <shape android:shape="rectangle">
             <solid android:color="#4FC3F7"/>
-            <corners android:radius="100dp"/>
-            <stroke android:color="@color/black" android:width="2dp"/>
-
+            <corners android:radius="20dp"/>
+            <stroke android:color="#2962FF" android:width="2dp"/> <!-- Contour par défaut -->
         </shape>
     </item>
 </selector>

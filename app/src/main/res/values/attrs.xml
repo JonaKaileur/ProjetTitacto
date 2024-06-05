@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+    <!--Déclare un ensemble d'attributs personnalisés pour la vue TicTacToeCarte-->
 <resources>
     <declare-styleable name="TicTacToeCarte">
         <attr name="CouleurCarte" format="color"/>

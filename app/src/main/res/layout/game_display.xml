@@ -11,18 +11,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#D7CCC8"
+        android:background="#FFF176"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-45dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="347dp"
-            android:layout_height="61dp"
-            android:layout_marginBottom="28dp"
+            android:layout_width="315dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="84dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.575"
+            app:layout_constraintHorizontal_bias="0.166"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints">
 
@@ -71,14 +71,17 @@
 
         <TextView
             android:id="@+id/player_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="348dp"
+            android:layout_height="49dp"
             android:text="TextView"
-            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="25dp"
             app:layout_constraintBottom_toTopOf="@+id/ticTacToeCarte"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.682"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.603" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

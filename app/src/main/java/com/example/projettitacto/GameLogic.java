@@ -26,9 +26,9 @@ public class GameLogic {
         if (gameBoard[row-1][col-1]==0){
             gameBoard[row - 1][col - 1] = player;
             if (player ==1){
-                playerTurn.setText(("au tour du :"+playerNames[1]));
+                playerTurn.setText(("Au tour du : "+playerNames[1]));
             }else {
-                playerTurn.setText(("au tour du :"+playerNames[0]));
+                playerTurn.setText(("Au tour du : "+playerNames[0]));
             }
 
             return true;
@@ -48,7 +48,7 @@ public class GameLogic {
         playAgainBTN.setVisibility(View.GONE);
         homeBTN.setVisibility(View.GONE);
 
-        playerTurn.setText(("au tour"+ playerNames[0]));
+        playerTurn.setText(("Au tour de"+ playerNames[0]));
     }
 
     public boolean winnerCheck(){
@@ -96,7 +96,7 @@ public class GameLogic {
         if (iswinner){
             playAgainBTN.setVisibility(View.VISIBLE);
             homeBTN.setVisibility(View.VISIBLE);
-            playerTurn.setText((playerNames[player-1] + "Gagné !!!!"));
+            playerTurn.setText((playerNames[player-1] + " à Gagné !🎉🎇"));
             return true;
         }
         else if (boerdfilled == 9){

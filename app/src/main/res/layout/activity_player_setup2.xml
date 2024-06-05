@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayerSetup">
+    tools:context=".PlayerSetup"
+    android:background="#FFF59D">
+
 
     <Button
         android:id="@+id/button2"
@@ -16,24 +18,26 @@
         android:text="@string/BoutonEnvoi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.289"
+        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.759" />
 
     <EditText
         android:id="@+id/Player2"
-        android:layout_width="276dp"
-        android:layout_height="94dp"
+        android:layout_width="244dp"
+        android:layout_height="38dp"
+        android:background="#D7CCC8"
         android:ems="10"
         android:hint="@string/NameHint"
         android:inputType="text"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Player1"
-        app:layout_constraintVertical_bias="0.242" />
+        app:layout_constraintVertical_bias="0.257" />
 
     <TextView
         android:id="@+id/textView2"
@@ -41,50 +45,57 @@
         android:layout_height="wrap_content"
         android:text="@string/Label11"
         android:textColor="#3A79D1"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323" />
+        app:layout_constraintVertical_bias="0.287" />
 
     <EditText
         android:id="@+id/Player1"
-        android:layout_width="269dp"
-        android:layout_height="67dp"
+        android:layout_width="240dp"
+        android:layout_height="37dp"
+        android:background="#D7CCC8"
         android:ems="10"
         android:hint="@string/NameHint"
         android:inputType="text"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.335"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="65dp"
-        android:layout_height="17dp"
+        android:layout_width="84dp"
+        android:layout_height="32dp"
         android:text="@string/Label12"
         android:textColor="#FB2C2C"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.513" />
+        app:layout_constraintVertical_bias="0.482" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_width="210dp"
+        android:layout_height="30dp"
+        android:background="#FFEE58"
         android:text="@string/TitrePlayerSetup"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintHorizontal_bias="0.412"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.198" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
